@@ -1,7 +1,7 @@
 # Учебный проект «Код и Магия» [![Build status][travis-image]][travis-url]
 
 * Студент: [Александр Смирнов](https://up.htmlacademy.ru/javascript/18/user/784121).
-* Наставник: `Неизвестно`.
+* Наставник: [Виктор Кан](https://up.htmlacademy.ru/javascript/18/user/241239).
 
 ---
 
