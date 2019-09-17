@@ -23,12 +23,12 @@ var COLUMN_HEIGHT = (CLOUD_HEIGHT - HEAD_TITLE - HEAD_TITLE_GAP - CLOUD_GAP - TE
 
 
 /* Функция для отрисовки облак */
-var renderedCloud = function(ctx, x, y, color) {
+var renderedCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
 };
 
-var getMaxElement = function(arr) {
+var getMaxElement = function (arr) {
   if (arr.length) {
     var maxElement = arr[0];
 
@@ -45,7 +45,7 @@ var getMaxElement = function(arr) {
 };
 
 /* Функция для вывода статистики */
-window.renderStatistics = function(ctx, names, times) {
+window.renderStatistics = function (ctx, names, times) {
   renderedCloud(ctx, CLOUD_X + CLOUD_GAP, CLOUD_Y + CLOUD_GAP, 'rgba(0, 0, 0, 0.7)');
   renderedCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
 
@@ -65,7 +65,7 @@ window.renderStatistics = function(ctx, names, times) {
     if (names[i] === 'Вы') {
       barColor = 'rgba(255, 0, 0, 1)';
     } else {
-      barColor = 'hsl(240, 100%, ' +  Math.random() * 100  + '%' + ')' ;
+      barColor = 'hsla(240, 100%, 50%, ' + Math.random() * 1.9 + ')';
     }
 
     ctx.fillStyle = barColor;
