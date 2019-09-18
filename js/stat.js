@@ -68,9 +68,10 @@ window.renderStatistics = function (ctx, names, times) {
       barColor = 'hsla(240, 100%, 50%, ' + Math.random() * 1.9 + ')';
     }
 
+    var asss = COLUMN_Y - CLOUD_GAP - ((COLUMN_HEIGHT * times[i]) / maxTime * (-1)) - TEXT_TOP_GAP;
     ctx.fillStyle = barColor;
     ctx.fillText(names[i], COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, COLUMN_Y);
-    ctx.fillText(Math.floor(times[i]), COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, CLOUD_HEIGHT - 190);
+    ctx.fillText(Math.floor(times[i]), COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, asss);
     ctx.fillRect(COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, COLUMN_Y - TEXT_TOP_GAP, COLUMN_WIDTH, (COLUMN_HEIGHT * times[i]) / maxTime);
   }
 };
