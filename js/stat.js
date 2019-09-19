@@ -12,7 +12,6 @@ var HEAD_TITLE = 40;
 var HEAD_TITLE_GAP = 20;
 
 /* Для гистограммы */
-
 var COLUMN_X = 150;
 var COLUMN_Y = 260;
 var COLUMN_WIDTH = 40;
@@ -26,6 +25,13 @@ var COLUMN_HEIGHT = (CLOUD_HEIGHT - HEAD_TITLE - HEAD_TITLE_GAP - CLOUD_GAP - TE
 var renderedCloud = function (ctx, x, y, color) {
   ctx.fillStyle = color;
   ctx.fillRect(x, y, CLOUD_WIDTH, CLOUD_HEIGHT);
+};
+
+/* Функция отрисовки заголовка */
+var renderedHeadTitle = function (ctx, text, x, y, font, color) {
+  ctx.font = font;
+  ctx.fillStyle = color;
+  ctx.fillText(text, x, y);
 };
 
 var getMaxElement = function (arr) {
@@ -44,34 +50,42 @@ var getMaxElement = function (arr) {
   return 0;
 };
 
+/* Функция отрисовки столбцов в гистограмме */
+var renderedColumn = function (ctx, x, y, width, height) {
+  ctx.fillRect(x, y, width, height);
+};
+
+/* Функция отрисовки текста для столбцов */
+var renderedColumnText = function (ctx, text, x, y) {
+  ctx.fillText(text, x, y);
+};
+
 /* Функция для вывода статистики */
 window.renderStatistics = function (ctx, names, times) {
   renderedCloud(ctx, CLOUD_X + CLOUD_GAP, CLOUD_Y + CLOUD_GAP, 'rgba(0, 0, 0, 0.7)');
   renderedCloud(ctx, CLOUD_X, CLOUD_Y, '#ffffff');
 
   /* Заголовки для облака статистики */
-  ctx.font = '16px PT Mono';
-  ctx.fillStyle = '#000000';
-  ctx.fillText('Ура вы победили!', (CLOUD_WIDTH / 2) + 30, HEAD_TITLE);
-  ctx.fillText('Список результатов:', (CLOUD_WIDTH / 2) + 20, HEAD_TITLE + HEAD_TITLE_GAP);
+  renderedHeadTitle(ctx, 'Ура вы победили!', (CLOUD_WIDTH / 2) + 30, HEAD_TITLE, '16px PT Mono', '#000000');
+  renderedHeadTitle(ctx, 'Список результатов:', (CLOUD_WIDTH / 2) + 15, HEAD_TITLE + HEAD_TITLE_GAP, '16px PT Mono', '#000000');
+
 
   /* Гистограмма пользователей */
   ctx.fillStyle = '#000000';
 
   var maxTime = getMaxElement(times);
-  var barColor = '#000000';
 
   for (var i = 0; i < names.length; i++) {
     if (names[i] === 'Вы') {
-      barColor = 'rgba(255, 0, 0, 1)';
+      ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
-      barColor = 'hsla(240, 100%, 50%, ' + Math.random() * 1.9 + ')';
+      ctx.fillStyle = 'hsla(240, 100%, 50%, ' + Math.random() * 1.9 + ')';
     }
 
-    var asss = COLUMN_Y - CLOUD_GAP - ((COLUMN_HEIGHT * times[i]) / maxTime * (-1)) - TEXT_TOP_GAP;
-    ctx.fillStyle = barColor;
-    ctx.fillText(names[i], COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, COLUMN_Y);
-    ctx.fillText(Math.floor(times[i]), COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, asss);
-    ctx.fillRect(COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, COLUMN_Y - TEXT_TOP_GAP, COLUMN_WIDTH, (COLUMN_HEIGHT * times[i]) / maxTime);
+    renderedColumnText(ctx, names[i], COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, COLUMN_Y);
+    renderedColumnText(ctx, Math.floor(times[i]), COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, COLUMN_Y - CLOUD_GAP - ((COLUMN_HEIGHT * times[i]) / maxTime * (-1)) - TEXT_TOP_GAP);
+    renderedColumn(ctx, COLUMN_X + (COLUMN_WIDTH + COLUMN_GAP) * i, COLUMN_Y - TEXT_TOP_GAP, COLUMN_WIDTH, (COLUMN_HEIGHT * times[i]) / maxTime);
   }
 };
+
+
