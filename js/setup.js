@@ -132,6 +132,8 @@ var fierballColor = document.querySelector('.setup-fireball-wrap');
 var fierballInputColor = document.querySelector('.setup-fireball-wrap input');
 
 fierballColor.addEventListener('click', function () {
-  fierballColor.style.background = FIREBALL_COLORS[randomNumber(FIREBALL_COLORS.length)];
-  fierballInputColor.value = fierballColor.style.background;
+  var color = FIREBALL_COLORS[randomNumber(FIREBALL_COLORS.length)];
+
+  fierballColor.style.background = color;
+  fierballInputColor.value = color;
 });
