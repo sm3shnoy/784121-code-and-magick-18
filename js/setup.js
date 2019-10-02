@@ -72,37 +72,37 @@ var setupClose = setup.querySelector('.setup-close');
 
 var popupEscKeydownHandler = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
-    closePopup();
+    closePopupClickHandler();
   }
 };
 
-var openPopup = function () {
+var openPopupClickHandler = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', popupEscKeydownHandler);
 };
 
-var closePopup = function () {
+var closePopupClickHandler = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', popupEscKeydownHandler);
 };
 
 setupOpen.addEventListener('click', function () {
-  openPopup();
+  openPopupClickHandler();
 });
 
 setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    openPopup();
+    openPopupClickHandler();
   }
 });
 
 setupClose.addEventListener('click', function () {
-  closePopup();
+  closePopupClickHandler();
 });
 
 setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
-    closePopup();
+    closePopupClickHandler();
   }
 });
 
