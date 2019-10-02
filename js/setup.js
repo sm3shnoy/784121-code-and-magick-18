@@ -59,7 +59,7 @@ for (var i = 0; i < wizards.length; i++) {
 similarListElement.appendChild(fragment);
 
 // Показываем диалоговое окно с магами
-// document.querySelector('.setup-similar').classList.remove('hidden');
+document.querySelector('.setup-similar').classList.remove('hidden');
 
 // Код клавиш
 var ESC_KEYCODE = 27;
