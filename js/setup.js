@@ -5,13 +5,10 @@ var WIZARD_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'К
 var WIZARD_SURNAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нинонго', 'Ирвинг'];
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 
 // Количество магов, которое нужно отобразить
 var COUNTER_WIZARDS = 4;
-
-// Показываем диалоговое окно с магами
-var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
 
 // Элементы на странице для отображения магов
 var similarListElement = document.querySelector('.setup-similar-list');
@@ -63,3 +60,80 @@ similarListElement.appendChild(fragment);
 
 // Показываем диалоговое окно с магами
 document.querySelector('.setup-similar').classList.remove('hidden');
+
+// Код клавиш
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
+// Показываем / скрываем окно редактирования персонажа
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+
+var popupEscKeydownHandler = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopupClickHandler();
+  }
+};
+
+var openPopupClickHandler = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', popupEscKeydownHandler);
+};
+
+var closePopupClickHandler = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', popupEscKeydownHandler);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopupClickHandler();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopupClickHandler();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopupClickHandler();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopupClickHandler();
+  }
+});
+
+// Поле для ввода имени
+var userNameInput = document.querySelector('.setup-user-name');
+
+userNameInput.addEventListener('keydown', function (evt) {
+  evt.stopPropagation();
+});
+
+/* Цвет мантии */
+var wizardCoat = document.querySelector('.setup-wizard .wizard-coat');
+
+wizardCoat.addEventListener('click', function () {
+  wizardCoat.style.fill = COAT_COLORS[randomNumber(COAT_COLORS.length)];
+});
+
+/* Цвет глаз */
+var wizardEyes = document.querySelector('.setup-wizard .wizard-eyes');
+
+wizardEyes.addEventListener('click', function () {
+  wizardEyes.style.fill = EYES_COLORS[randomNumber(EYES_COLORS.length)];
+});
+
+/* Цвет фаербола */
+var fierballColor = document.querySelector('.setup-fireball-wrap');
+var fierballInputColor = document.querySelector('.setup-fireball-wrap input');
+
+fierballColor.addEventListener('click', function () {
+  var color = FIREBALL_COLORS[randomNumber(FIREBALL_COLORS.length)];
+
+  fierballColor.style.background = color;
+  fierballInputColor.value = color;
+});
