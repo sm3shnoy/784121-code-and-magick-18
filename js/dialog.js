@@ -37,5 +37,5 @@
   };
 
   /* Перетаскиваем диалоговое окно */
-  var dialogHandle = setup.querySelector('.upload');
+  // var dialogHandle = setup.querySelector('.upload');
 })();
