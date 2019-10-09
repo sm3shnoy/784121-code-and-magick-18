@@ -33,6 +33,7 @@
 
   var closePopupClickHandler = function () {
     setup.classList.add('hidden');
+    setup.style = '';
     document.removeEventListener('keydown', popupEscKeydownHandler);
   };
 
