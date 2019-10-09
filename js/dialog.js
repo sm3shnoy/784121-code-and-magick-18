@@ -36,7 +36,7 @@
     document.removeEventListener('keydown', popupEscKeydownHandler);
   };
 
-    /* Перетаскиваем диалоговое окно */
+  /* Перетаскиваем диалоговое окно */
   var dialogHandler = setup.querySelector('.upload');
 
   dialogHandler.addEventListener('mousedown', function (evt) {
@@ -62,9 +62,9 @@
         x: moveEvt.clientX,
         y: moveEvt.clientY
       };
-      
-      setup.style.top = (setup.offsetTop - shift.y) + 'px';    
-      setup.style.left = (setup.offsetLeft - shift.x) + 'px';      
+
+      setup.style.top = (setup.offsetTop - shift.y) + 'px';
+      setup.style.left = (setup.offsetLeft - shift.x) + 'px';
     };
 
     var onMouseUp = function (upEvt) {
