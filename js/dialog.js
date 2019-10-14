@@ -37,6 +37,32 @@
     document.removeEventListener('keydown', popupEscKeydownHandler);
   };
 
+  // Отправляем форму
+  var form = document.querySelector('.setup-wizard-form');
+  var saveForm = function () {
+    form.classList.add('hidden');
+  };
+
+  var errorSaveForm = function (errorMessage) {
+    var errorMsg = document.createElement('div');
+
+    errorMsg.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    errorMsg.style.position = 'absolute';
+    errorMsg.style.left = 0;
+    errorMsg.style.right = 0;
+    errorMsg.style.fontSize = '30px';
+
+    errorMsg.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', errorMsg);
+  };
+
+  form.addEventListener('submit', function (evt) {
+    var formData = new FormData(form);
+
+    window.backend.save(formData, saveForm, errorSaveForm);
+    evt.preventDefault();
+  });
+
   /* Перетаскиваем диалоговое окно */
   var dialogHandler = setup.querySelector('.upload');
 
